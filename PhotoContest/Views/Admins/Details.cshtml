@@ -1,0 +1,55 @@
+﻿@{
+    this.ViewData["Title"] = "Details";
+}
+@model User
+
+<h2>@this.Model.FirstName @this.Model.LastName</h2>
+
+<p class="margin12"><font color="Blue">Username: </font> @this.Model.Username</p>
+
+<p class="margin12"><font color="Blue">Role:</font> @this.Model.Role.Name</p>
+<p class="margin12"><font color="Blue">Email:</font> @this.Model.Email</p>
+
+<h5><font color="Blue">Contests like Jury</font></h5>
+<ul>
+    @{
+        foreach (var contestUser in this.Model.Contests)
+        {
+            if (@contestUser.IsJury == true)
+            {
+                <li class="margin12">@contestUser.Contest.Title</li>
+            }
+        }
+    }
+</ul>
+<h5><font color="Blue">Contests like Participant</font></h5>
+<ul>
+    @{
+        foreach (var contestUser in this.Model.Contests)
+        {
+            if (@contestUser.IsJury == false)
+            {
+                <li class="margin12"> @contestUser.Contest.Title </li>
+            }
+        }
+    }
+</ul>
+
+
+<h5><font color="Blue">PhotoPosts</font></h5>
+@foreach (var item in this.Model.PhotoPosts)
+{
+    <div class="card" style="width: 30rem;">
+        <img src="@item.Url" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">@item.Title</h5>
+            <p class="card-text">@item.Story</p>
+            <a href="#" class="card-link">@item.User.Username</a>
+        </div>
+    </div>
+}
+
+@*<a asp-controller="PhotoPost" asp-action="Create" asp-route-contestId="@Model.Id" class="btn btn-outline-success">Add PhotoPost</a>*@
+<p></p>
+<br />
+<a href="/Admins/index" class="nav">Go Back</a>

@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Delete Contest";
+}
+
+@model User
+
+<h4>User: @this.Model.Username</h4>
+<h6>First name:  @this.Model.FirstName</h6>
+<h6>Last name:  @this.Model.LastName</h6>
+<h6>Email: @this.Model.Email</h6>
+<br>
+<div>
+    <h6><font font color="red">Are you sure you want to delete this user ?</font></h6>
+</div>
+<br>
+<form asp-controller="Admins" asp-action="ConfirmDelete" asp-route-id="@this.Model.Id" method="post">
+    <input type="submit" value="Yes" class="btn btn-danger" /> 
+    <a asp-controller="Admins" asp-action="Index" class="btn-link">No, go back</a>
+</form>

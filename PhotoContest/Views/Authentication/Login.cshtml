@@ -1,0 +1,42 @@
+﻿@{
+    this.ViewData["Title"] = "Login";
+}
+
+@model LoginViewModel
+
+<section class="showcase">
+    <div class="video-container">
+        <video src="https://res.cloudinary.com/doifgnlmu/video/upload/v1655942759/PC%20View%20Use/Particles_-_45530_qpsudd.mp4" autoplay muted loop></video>
+    </div>
+    <div class="content">
+
+<h2>Login</h2>
+
+<form asp-controller="Authentication" asp-action="Login" method="post">
+    <div class="form-group">
+        <label asp-for="Username" class="form-label"></label>
+        <br />
+        <input asp-for="Username" class="form-control" />
+        <span asp-validation-for="Username" class="form-error"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Password" class="form-label"></label>
+        <br />
+        <input asp-for="Password" type="password" class="form-control" />
+        <span asp-validation-for="Password" class="form-error"></span>
+    </div>
+
+
+    <input type="submit" value="Login" class="btn btn-primary" />
+
+     <button>
+        @*<a style="text-decoration:none" asp-controller="Authentication" asp-action="Register" class="btn btn-secondary">Register</a>*@
+        <a style="text-decoration:none" asp-controller="Authentication" asp-action="Register" class="btn btn-light">Register</a>
+    </button>
+
+
+</form>
+    
+</div>
+</section>

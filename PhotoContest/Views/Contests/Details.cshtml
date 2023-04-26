@@ -1,0 +1,110 @@
+﻿@using PhotoContest.Models.Enums
+@using PhotoContest.Models.ViewModels
+@using PhotoContest.Models
+@using PhotoContest.Controllers
+
+@{
+    this.ViewData["Title"] = "Details";
+}
+@model ContestDetailViewModel
+
+
+
+<h2>@this.Model.Title</h2>
+
+<p class="margin12"><b>Category:</b><br /> @this.Model.Category.Name</p>
+<p class="margin12"><b>Type:</b> @if (this.Model.IsOpen == true){<p>Open</p>}
+
+  @if (this.Model.IsOpen == false)
+  {
+    <p> Invitational </p>
+  }
+<p class="margin12"><b>Phase Name:</b> @this.Model.PhaseName</p>
+<p class="margin12"><b>Phase One Start:</b> @this.Model.Phase1Start</p>
+<p class="margin12"><b>Phase Two Start:</b> @this.Model.Phase2Start</p>
+<p class="margin12"><b>End Date:</b> @this.Model.EndDate</p>
+
+                        @if (((string)this.ViewData["CurrentUserRole"]) == "admin")
+                        {
+                            <li class="nav-item">
+                                <a asp-controller="Admins" asp-action="Index" class="nav-link">Users</a>
+                            </li>
+                        }
+
+<h5>Jury</h5>
+<ul>
+    @{
+        foreach (var contestUser in this.Model.Users)
+        {
+            if (@contestUser.IsJury == true)
+            {
+                <li class="margin12">@contestUser.User.FirstName @contestUser.User.LastName,  @contestUser.User.Username </li>
+            }
+        }
+    }
+</ul>
+<h5>Participants</h5>
+<ul>
+    @{
+        foreach (var contestUser in this.Model.Users)
+        {
+            if (@contestUser.IsJury == false)
+            {
+                <li class="margin12">@contestUser.User.FirstName @contestUser.User.LastName,  @contestUser.User.Username </li>
+            }
+        }
+    }
+</ul>
+
+<br />
+<a asp-controller="PhotoPost" asp-action="Create" asp-route-contestId="@Model.Id" class="btn btn-outline-success">Add PhotoPost</a>
+<br />
+<br />
+
+
+<h5>PhotoPosts</h5>
+
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Photo</th>
+      <th scope="col">Info</th>
+    </tr>
+  </thead>
+  <tbody>
+@foreach (var item in this.Model.PhotoPosts)
+{    <tr>
+
+      <td>
+          <img src="@item.Url" width="450">
+      </td>
+      <td>
+          <p>Author: @item.User.Username</p>
+          <p>Title: @item.Title</p>
+          <p>Story: @item.Story</p>
+
+          @if (item.HasRatingBy(Model.CurrentlyLoggedUser))
+          {
+              <p>Rating: @String.Format("{0:0.00}", item.TotalRating)</p>
+          }
+          else
+          {
+              <a asp-controller="PhotoPost" asp-action="Rate" asp-route-photoPostId="@item.Id" class="btn btn-primary">Rate</a>
+          }
+          
+      </td>
+    </tr>
+}
+</table>
+
+
+<br />
+<a href="/Contests/index" class="nav">Go Back</a>
+
+@{
+    var time = DateTime.Now.ToString("MMM dd, yyyy HH:mm:ss"); 
+}
+<p>@time</p>
+<br/>

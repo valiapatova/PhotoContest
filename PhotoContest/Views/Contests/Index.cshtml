@@ -1,0 +1,105 @@
+﻿@{
+    this.ViewData["Title"] = "Contests";
+    this.ViewData["CurrentUserRole"] = this.Context.Session.GetString("CurrentUserRole");
+
+}
+
+@model PaginatedList<Contest>
+
+<h2>Contests</h2>
+
+<form asp-controller="Contests" asp-action="Index" method="get" class="form-inline">
+    <input type="text" class="form-control" name="Title" />
+    <input type="submit" value="Search" class="btn btn-primary" />
+    by Title:
+    @*&nbspby Title:*@
+</form>
+<form asp-controller="Contests" asp-action="Index" method="get" class="form-inline">
+    <input type="text" class="form-control" name="Category" />
+    <input type="submit" value="Search" class="btn btn-primary" />
+    by Category:
+</form>
+<form asp-controller="Contests" asp-action="Index" method="get" class="form-inline">
+    <input type="text" class="form-control" name="Phase" />
+    <input type="submit" value="Search" class="btn btn-primary" />
+    by Phase:
+</form>
+<form asp-controller="Contests" asp-action="Index" method="get" class="form-inline">
+    <input type="text" class="form-control" name="Type" />
+    <input type="submit" value="Search" class="btn btn-primary" />
+    by Type:
+</form>
+
+<table class="table table-hover">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">
+                <a asp-controller="Contests" asp-action="Index" asp-route-SortBy="Title" asp-route-SortOrder="@this.ViewData["SortOrder"]">Title</a>
+            </th>
+            <th scope="col">
+                <a asp-controller="Contests" asp-action="Index" asp-route-SortBy="Category" asp-route-SortOrder="@this.ViewData["SortOrder"]">Category</a>
+            </th>
+            <th scope="col">
+                <a asp-controller="Contests" asp-action="Index" asp-route-SortBy="phase" asp-route-SortOrder="@this.ViewData["SortOrder"]">Phase</a>
+            </th>
+            @*<th scope="col">Phase1 Start</th>
+            <th scope="col">Phase2 Start</th>
+            <th scope="col">End Date</th>*@
+            <th scope="col">
+                <a asp-controller="Contests" asp-action="Index" asp-route-SortBy="type" asp-route-SortOrder="@this.ViewData["SortOrder"]">IsOpen</a>
+            </th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int counter = 1;
+
+            foreach (var contest in this.Model)
+            {
+                <tr>
+                    <th scope="row">@counter</th>
+                    <td>@contest.Title</td>
+                    <td>@contest.Category.Name</td>
+                    <td>@contest.PhaseName</td>
+                    @*<td>@contest.Phase1Start</td>
+            <td>@contest.Phase2Start</td>
+            <td>@contest.EndDate</td*@>
+                    <td>@contest.IsOpen</td>
+                    <td>
+                        <a asp-controller="Contests" asp-action="Details" asp-route-id="@contest.Id" class="btn btn-link">Details</a>
+                        @if (((string)this.ViewData["CurrentUserRole"]) == "admin")
+                        {
+                            <a asp-controller="Contests" asp-action="Edit" asp-route-id="@contest.Id" class="btn btn-link">Edit</a>
+                            <a asp-controller="Contests" asp-action="Delete" asp-route-id="@contest.Id" class="btn btn-link">Delete</a>
+                        }
+                    </td>
+                </tr>
+
+                counter += 1;
+            }
+        }
+    </tbody>
+</table>
+
+@{
+    string previousButtonState = (this.Model.HasPreviosPage) ? "" : "disabled";
+    string nextButtonState = (this.Model.HasNextPage) ? "" : "disabled";
+}
+
+<a asp-controller="Contests" asp-action="Index"
+   asp-route-PageNumber="@(this.Model.PageNumber - 1)"
+   class="nav-link @previousButtonState">
+    Previous
+</a>
+<a asp-controller="Contests" asp-action="Index"
+   asp-route-PageNumber="@(this.Model.PageNumber + 1)"
+   class="nav-link @nextButtonState">
+    Next
+</a>
+
+@if (((string)this.ViewData["CurrentUserRole"]) == "admin")
+{
+    <a asp-controller="Contests" asp-action="Create" class="btn btn-success btn-lg">Create a new contest</a>
+}

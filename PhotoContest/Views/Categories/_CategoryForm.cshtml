@@ -1,0 +1,16 @@
+﻿@model CategoryViewModel
+
+@*<form href="/Categories/Create" method="post">*@
+
+<form asp-controller="Categories" asp-action="@this.ViewData["Action"]" method="post">
+
+    <div class="form-group" style="display: @this.ViewData["PostFormVisibility"]">
+        <label asp-for="Name"></label>
+        <input type="text" asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <input type="submit" value="@this.ViewData["SubmitButton"]" class="btn btn-success" />
+
+    <a href="/Categories/index" class="nav">Go Back</a>
+</form>

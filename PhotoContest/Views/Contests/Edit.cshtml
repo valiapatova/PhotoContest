@@ -1,0 +1,14 @@
+﻿@{
+    this.ViewData["Title"] = "Edit";
+    this.ViewData["Action"] = "Edit";
+    this.ViewData["SubmitButton"] = "Save";
+    this.ViewData["PostFormVisibility"] = "block";
+    this.ViewData["PhaseFormVisibility"] = "block";
+    this.ViewData["UserFormVisibility"] = "block";
+}
+
+@model ContestViewModel
+
+<h2>@this.Model.Title</h2>
+
+<partial name="_ContestForm" />

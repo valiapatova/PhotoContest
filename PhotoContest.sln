@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoContest", "PhotoContest\PhotoContest.csproj", "{87E3B44B-5940-4934-9D7D-40FAAB731FDA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87E3B44B-5940-4934-9D7D-40FAAB731FDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87E3B44B-5940-4934-9D7D-40FAAB731FDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87E3B44B-5940-4934-9D7D-40FAAB731FDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87E3B44B-5940-4934-9D7D-40FAAB731FDA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5179C0F5-18C3-4DBB-BA91-C5EA65650D4A}
+	EndGlobalSection
+EndGlobal

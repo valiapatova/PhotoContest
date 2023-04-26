@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Delete Contest";
+}
+
+@model Contest
+
+<h4>Contest: @this.Model.Title</h4>
+<h6>category @this.Model.Category.Name</h6>
+<h6>phase @this.Model.PhaseName</h6>
+<h6>phaseOne @this.Model.Phase1Start</h6>
+<h6>phaseTwo @this.Model.Phase2Start</h6>
+<h6>endDate @this.Model.EndDate</h6>
+<br>
+<div>
+    <h6><font font color="red">Are you sure you want to delete this contest ?</font></h6>
+</div>
+<br>
+<form asp-controller="Contests" asp-action="ConfirmDelete" asp-route-id="@this.Model.Id" method="post">
+    <input type="submit" value="Yes" class="btn btn-danger" /> 
+    <a asp-controller="Contests" asp-action="Index" class="btn-link">No, go back</a>
+</form>

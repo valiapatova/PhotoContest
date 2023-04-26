@@ -1,0 +1,44 @@
+﻿@{
+    this.ViewData["Title"] = "Categories";
+}
+
+@model List<Category>
+
+<h4>Hello, @Context.Session.GetString("CurrentUser")!</h4>
+
+<h2>Categories</h2>
+
+<div>
+    @*<a href="/Categories/Create" class="btn btn-primary">Create Category</a>*@
+    <a asp-controller="Categories" asp-action="Create" class="btn btn-primary">Create Category</a>
+</div>
+
+<table class="table table-hever">
+    @*<table class="table">*@
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int count = 1;
+            foreach (var category in this.Model)
+            {
+                <tr>
+                    <th scope="row">@count</th>
+                    <td>@category.Name</td>
+
+                    <td>
+                        @*<a asp-controller="Categories" asp-action="Details" asp-route-id="@category.Id">Details</a>
+                <br />*@
+                        <a asp-controller="Categories" asp-action="Edit" asp-route-id="@category.Id" style="color:red">Edit</a>
+                    </td>
+                </tr>
+                count += 1;
+            }
+        }
+    </tbody>
+</table>

@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    this.ViewData["IsAuthenticated"] = this.Context.Session.Keys.Contains("CurrentUser");
+    this.ViewData["CurrentUser"] = this.Context.Session.GetString("CurrentUser");
+    this.ViewData["CurrentUserRole"] = this.Context.Session.GetString("CurrentUserRole");
+}
+
+
+<section class="showcase">
+    <div class="video-container">
+        <video src="~/videos/homevideo.mp4" autoplay muted loop></video>
+    </div>
+    <div class="content">
+          @if ((bool)this.ViewData["IsAuthenticated"])
+            {
+                <h1>Hello, @Context.Session.GetString("CurrentUser")!</h1>
+                @*<li class="nav-item">*@
+                   <a id="myId" asp-controller="Contests" asp-action="Index" class="btn btn-primary">See all available contests</a>
+                @*</li>*@
+            }
+          else
+            {
+                <h1>Photo Contest</h1>
+                <h3>Join our website and show your special skills</h3>
+              <a id="myId" asp-controller="Authentication" asp-action="Register" class="btn btn-primary">Register</a>
+            }
+    </div>
+</section>

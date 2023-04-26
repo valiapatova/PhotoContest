@@ -1,0 +1,14 @@
+﻿@{
+    this.ViewData["Title"] = "Create a new contest";
+    this.ViewData["Action"] = "Create";
+    this.ViewData["SubmitButton"] = "Create";
+    this.ViewData["ContestFormVisibility"] = "block";
+    this.ViewData["PhaseFormVisibility"] = "none";
+    this.ViewData["UserFormVisibility"] = "none";
+}
+
+@model ContestViewModel
+
+    <h2>Create a new contest</h2>
+
+    <partial name="_ContestForm" />
